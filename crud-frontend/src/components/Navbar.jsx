@@ -15,7 +15,7 @@ export default function NavBar({onOpen}) {
             <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
             </div>
             <div className="navbar-end">
-            <a className="btn btn-primary" onClick={onOpen}>Add Client</a>
+            <a className="btn btn-primary" onClick={() => onOpen("add")}>Add Client</a>
             </div>
     </div>
         </>

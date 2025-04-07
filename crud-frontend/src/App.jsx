@@ -6,32 +6,38 @@ import TableList from './components/TableList'
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
-  const [modalMode, setModalMode] = useState(false);
+  const [modalMode, setModalMode] = useState("add");
 
-  const handleIsOpen = (mode) => {
+  const handleOpen = (mode) => {
+    setModalMode(mode);
     setIsOpen(true);
-  }
+};
 
-  const handleSubmit = () => {
-    if(modalMode === 'add') {
-      console.log("Modal Mode Add");
+const handleSubmit = () => {
+    if (modalMode === 'add') {
+        // Handle add item
     } else {
-      console.log("Modal Mode Edit");
+        // Handle edit item
     }
-  }
+    setIsOpen(false);
+};
+
   return (
     <>
     <html data-theme="retro">
       <div>
-       <NavBar
-         onOpen={() => handleIsOpen('add')} 
-       />
-       <TableList />
-       <ModalForm
-        isOpen={isOpen} 
-        onSubmit={handleSubmit}
-        onClose={() => setIsOpen(false)}
-       />
+      <NavBar 
+        onOpen={() => handleOpen('add')}
+      />
+        <TableList 
+          handleOpen={() => handleOpen('edit')}
+        />
+        <ModalForm 
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          mode={modalMode}
+          onSubmit={handleSubmit}
+        />
       </div>
     </html>
     </>
