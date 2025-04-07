@@ -16,6 +16,7 @@ export default function TableList() {
                         <th>Email</th>
                         <th>Job</th>
                         <th>Rate (USD/Hour)</th>
+                        <th>Status</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -28,6 +29,21 @@ export default function TableList() {
                             <td>{client.email}</td>
                             <td>{client.job}</td>
                             <td>{client.rate}</td>
+                            <td>
+                                <button className={`btn rounded-full w-20 ${client.isActive ? `btn-secondary`: `btn-outline black`}`}>
+                                    {client.isActive ? "Active" : "Inactive"}
+                                </button>
+                            </td>
+                            <td>
+                                <button className="btn rounded-full btn-primary">
+                                    Update
+                                </button>
+                            </td>
+                            <td>
+                                <button className="btn rounded-full btn-accent">
+                                    Delete
+                                </button>
+                            </td>
                             </tr>
                         )
                     )}

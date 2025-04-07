@@ -1,4 +1,4 @@
-export default function Navbar() {
+export default function NavBar({onOpen}) {
     return (
         <>
         <div className="navbar bg-base-100 shadow-sm">
@@ -15,7 +15,7 @@ export default function Navbar() {
             <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
             </div>
             <div className="navbar-end">
-            <a className="btn btn-primary">Button</a>
+            <a className="btn btn-primary" onClick={onOpen}>Add Client</a>
             </div>
     </div>
         </>
