@@ -1,5 +1,6 @@
 import './App.css'
 import Navbar from './components/Navbar'
+import TableList from './components/TableList'
 
 function App() {
 
@@ -8,6 +9,7 @@ function App() {
     <html data-theme="retro">
       <div>
        <Navbar />
+       <TableList />
       </div>
     </html>
     </>
