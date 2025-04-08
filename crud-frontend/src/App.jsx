@@ -1,11 +1,8 @@
 import './App.css'
-import Navbar from './components/Navbar'
+import NavBar from './components/NavBar'
 import  TableList  from './components/TableList'
 import ModalForm from './components/ModalForm';
 import { useState } from 'react';
-
-
-
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,15 +26,14 @@ function App() {
   return (
     <>
     {/* ++ py-5 px-5 */}
-    <div className="py-5 px-5 ">
-        <Navbar onOpen={() => handleOpen('add')}/>
-        <TableList onOpen={() => handleOpen('edit')}/>
-        <ModalForm isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        mode={modalMode}
-        onSubmit={handleSubmit}/>
-    </div>
-      
+      <div className="py-5 px-5 " data-theme="pastel">
+          <NavBar onOpen={() => handleOpen('add')}/>
+          <TableList onOpen={() => handleOpen('edit')}/>
+          <ModalForm isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          mode={modalMode}
+          onSubmit={handleSubmit}/>
+      </div>
     </>
   )
 }
