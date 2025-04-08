@@ -2,18 +2,44 @@ export default function ModalForm ({isOpen, onClose, mode, onSubmit}) {
     return (
         <>
             {/* You can open the modal using document.getElementById('ID').showModal() method */}
-            <dialog id="my_modal_3" className="modal" open={isOpen}>
+            <dialog id="my_modal_1" className="modal" open={isOpen}>
             <div className="modal-box">
+            <div className="modal-action">
                 <form method="dialog">
                 {/* if there is a button in form, it will close the modal */}
                 <h3 className="font-bold text-lg">{mode ==="edit" ? "Edit Client" : "Add Client"}</h3>
-                <label className="input">
-                    <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2.5" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></g></svg>
-                    <input type="search" className="grow" placeholder="Search" />
+                <label className="input my-4">
+                    Name
+                    <input type="text" className="grow " />
                 </label>
+                <label className="input my-4">
+                    Email
+                    <input type="text" className="grow " />
+                </label>
+                <label className="input my-4">
+                    Job
+                    <input type="text" className="grow " />
+                </label>
+
+                <div className="flex mb-4 justify-between">
+                <label className="input  my-4">
+                    Rate
+                    <input type="number" className="grow " />
+                </label>
+                </div>
+
+                <select defaultValue="" className="select mb-4">
+                    <option>Active</option>
+                    <option>Inactive</option>
+                </select>
+                <div>
+
+                    <button className="btn btn-success">{mode ==="edit" ? "Save Changes" : "Add Client"}</button>
+                    <button className="btn">Close</button>
+                </div>
                 <button onClick={onClose} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" >✕</button>
-                <button className="btn btn-success">{mode ==="edit" ? "Save Changes" : "Add Client"}</button>
                 </form>
+            </div>
             </div>
             </dialog>
         </>
