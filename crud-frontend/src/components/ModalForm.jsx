@@ -1,11 +1,43 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function ModalForm({ isOpen, onClose, mode, onSubmit }) {
+export default function ModalForm({ isOpen, onClose, mode, onSubmit, clientData }) {
     const [rate, setRate] = useState('');
     const [name, setName] = useState(''); // State for Name
     const [email, setEmail] = useState(''); // State for Email
     const [job, setJob] = useState(''); // State for Job
     const [status, setStatus] = useState(''); // State for Status
+
+    const handleStatusChange = (e) => {
+        setStatus(e.target.value === 'Active'); // Set status as boolean
+    }
+    
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        try{
+            const clientData = {name, email, job, rate: Number(rate), isactive: status};
+            await onSubmit(clientData);
+            onClose();
+        } catch(err){
+            console.log("Error adding client: ", err)
+        }
+    }
+
+      useEffect(() => {
+        if (mode === 'edit' && clientData) {
+            setName(clientData.name);
+            setEmail(clientData.email);
+            setJob(clientData.job);
+            setRate(clientData.rate);
+            setStatus(clientData.isActive); // Assuming isActive is a boolean
+        } else {
+            // Reset fields when adding a new client
+            setName('');
+            setEmail('');
+            setJob('');
+            setRate('');
+            setStatus(false);
+        }
+    }, [mode, clientData]);
 
     return (
         <>  
@@ -15,11 +47,11 @@ export default function ModalForm({ isOpen, onClose, mode, onSubmit }) {
                 <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={onClose}>✕</button>
                 <h3 className="font-bold text-lg py-4">{mode === 'edit' ? 'Edit Client' : 'Client Details'}</h3>
                 
-                <form onSubmit={(e) => { e.preventDefault(); onSubmit();}}>
+                <form onSubmit={handleSubmit}>
 
                     <label className="input flex items-center my-4 gap-2 w-full">
                     Name 
-                    <input type="text" className="grow"  value={name} onChange={(e) => setName(e.target.value)}/>
+                    <input type="text" className="grow"   value={name} onChange={(e) => setName(e.target.value)}/>
                     </label>
                     <label className="input flex items-center my-4 gap-2 w-full">
                     Email 
@@ -36,7 +68,7 @@ export default function ModalForm({ isOpen, onClose, mode, onSubmit }) {
                         <input type="number" className="grow"  value={rate} onChange={(e) => setRate(e.target.value)}/>
                         </label>
 
-                        <select className="select w-full max-w-xs" onChange={(e) => setStatus(e.target.value)}>
+                        <select className="select w-full max-w-xs" onChange={handleStatusChange}>
                         <option>Inactive</option>
                         <option>Active</option>
                         </select>

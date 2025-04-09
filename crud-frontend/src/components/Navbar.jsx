@@ -1,4 +1,10 @@
-export default function NavBar({onOpen}) {
+export default function NavBar({onOpen, onSearch}) {
+
+    const handleSearchChange = (event) =>
+    {
+        onSearch(event.target.value);
+    }
+
     return (
         <>
         <div className="navbar bg-base-100 shadow-sm">
@@ -12,7 +18,7 @@ export default function NavBar({onOpen}) {
             <a className="btn btn-ghost text-xl">daisyUI</a>
             </div>
             <div className="navbar-center hidden lg:flex">
-            <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
+            <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" onChange={handleSearchChange}/>
             </div>
             <div className="navbar-end">
             <a className="btn btn-primary" onClick={() => onOpen("add")}>Add Client</a>
