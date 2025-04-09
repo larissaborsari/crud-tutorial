@@ -30,7 +30,6 @@ export default function ModalForm({ isOpen, onClose, mode, onSubmit }) {
                     <input type="text" className="grow"  value={job} onChange={(e) => setJob(e.target.value)}/>
                     </label>
 
-                    {/* ++ made this anumber */}
                     <div className="flex mb-4 justify-between">
                         <label className="input flex mr-4 items-center gap-2">
                         Rate
