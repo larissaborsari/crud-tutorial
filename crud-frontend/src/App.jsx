@@ -28,14 +28,12 @@ function App() {
 
 
   const handleOpen = (mode, client) => {
-    console.log("handleOpen chamado:", mode, client);
       setClientData(client);
       setModalMode(mode);
       setIsOpen(true);
   };
 
   const handleClose = () => {
-    console.log("handleClose chamado");
     setIsOpen(false);
 };
 
@@ -67,7 +65,7 @@ function App() {
   return (
     <>
     {/* ++ py-5 px-5 */}
-      <div className="py-5 px-5 " data-theme="pastel">
+      <div className="py-5 px-5 " data-theme="retro">
           <NavBar onOpen={() => handleOpen('add')} onSearch={setSearchTerm}/>
           <TableList onOpen={(client) => handleOpen('edit', client)} searchTerm={searchTerm} tableData={tableData} setTableData={setTableData}/>
           <ModalForm isOpen={isOpen}

@@ -51,8 +51,8 @@ return (
                         <td>{item.rate}</td>
                         <td>
                             <button
-                                className={`btn rounded-full w-20 ${item.status ? 'btn-primary' : 'btn-outline btn-primary'}`}>
-                                {item.status ? 'Active' : 'Inactive'}
+                                className={`btn rounded-full w-20 ${item.isactive ? 'btn-warning' : 'btn-outline btn-warning'}`}>
+                                {item?.isactive ? 'Active' : 'Inactive'}
                             </button>
                         </td>
                         <td>

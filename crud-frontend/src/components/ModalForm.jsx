@@ -9,13 +9,18 @@ export default function ModalForm({ isOpen, onClose, mode, onSubmit, clientData 
     const modalRef = useRef(null);
 
     const handleStatusChange = (e) => {
-        setStatus(e.target.value === 'Active'); // Set status as boolean
+        if (e?.target?.value === 'Active'){
+            setStatus(true); 
+        }
+        else if (e?.target?.value === 'Inactive'){
+            setStatus(false);
+        }
     }
     
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const clientData = { name, email, job, rate: Number(rate), isActive: status };
+            const clientData = { name, email, job, rate: Number(rate), isactive: status };
             await onSubmit(clientData);
             onClose();
         } catch (err) {
@@ -79,7 +84,7 @@ export default function ModalForm({ isOpen, onClose, mode, onSubmit, clientData 
                         <input type="number" className="grow"  value={rate} onChange={(e) => setRate(e.target.value)}/>
                         </label>
 
-                        <select className="select w-full max-w-xs" onChange={handleStatusChange}>
+                        <select className="select w-full max-w-xs" onChange={(e) => handleStatusChange(e)}>
                         <option>Inactive</option>
                         <option>Active</option>
                         </select>
