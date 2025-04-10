@@ -45,7 +45,7 @@ export default function ModalForm({ isOpen, onClose, mode, onSubmit, clientData 
             setEmail(clientData.email);
             setJob(clientData.job);
             setRate(clientData.rate);
-            setStatus(clientData.isActive); // Assuming isActive is a boolean
+            setStatus(clientData.isactive); // Assuming isActive is a boolean
         } else {
             // Reset fields when adding a new client
             setName('');
@@ -84,9 +84,9 @@ export default function ModalForm({ isOpen, onClose, mode, onSubmit, clientData 
                         <input type="number" className="grow"  value={rate} onChange={(e) => setRate(e.target.value)}/>
                         </label>
 
-                        <select className="select w-full max-w-xs" onChange={(e) => handleStatusChange(e)}>
-                        <option>Inactive</option>
-                        <option>Active</option>
+                        <select className="select w-full max-w-xs" value={status ? 'Active' : 'Inactive'} onChange={(e) => handleStatusChange(e)}>
+                            <option>Inactive</option>
+                            <option>Active</option>
                         </select>
 
                     </div>
