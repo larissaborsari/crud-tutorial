@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function ModalForm({ isOpen, onClose, mode, onSubmit, clientData }) {
     const [rate, setRate] = useState('');
@@ -6,21 +6,33 @@ export default function ModalForm({ isOpen, onClose, mode, onSubmit, clientData 
     const [email, setEmail] = useState(''); // State for Email
     const [job, setJob] = useState(''); // State for Job
     const [status, setStatus] = useState(''); // State for Status
+    const modalRef = useRef(null);
 
     const handleStatusChange = (e) => {
         setStatus(e.target.value === 'Active'); // Set status as boolean
     }
     
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        try{
-            const clientData = {name, email, job, rate: Number(rate), isactive: status};
+        try {
+            const clientData = { name, email, job, rate: Number(rate), isActive: status };
             await onSubmit(clientData);
             onClose();
-        } catch(err){
-            console.log("Error adding client: ", err)
+        } catch (err) {
+            console.log("Error adding client: ", err);
         }
     }
+
+    useEffect(() => {
+        const dialog = modalRef.current;
+        if (!dialog) return;
+    
+        if (isOpen) {
+            dialog.showModal();
+        } else {
+            dialog.close();
+        }
+    }, [isOpen]);
 
       useEffect(() => {
         if (mode === 'edit' && clientData) {
@@ -41,8 +53,7 @@ export default function ModalForm({ isOpen, onClose, mode, onSubmit, clientData 
 
     return (
         <>  
-
-            <dialog id="my_modal_3" className="modal"  open={isOpen}>
+            <dialog ref={modalRef} id="my_modal_3" className="modal">
             <div className="modal-box">
                 <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={onClose}>✕</button>
                 <h3 className="font-bold text-lg py-4">{mode === 'edit' ? 'Edit Client' : 'Client Details'}</h3>

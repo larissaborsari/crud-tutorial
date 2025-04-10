@@ -11,8 +11,6 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [clientData, setClientData] = useState(null);
   const [tableData, setTableData] = useState([]);
-
-
   
   const fetchClients = async () => {
         try {
@@ -30,10 +28,16 @@ function App() {
 
 
   const handleOpen = (mode, client) => {
+    console.log("handleOpen chamado:", mode, client);
       setClientData(client);
       setModalMode(mode);
       setIsOpen(true);
   };
+
+  const handleClose = () => {
+    console.log("handleClose chamado");
+    setIsOpen(false);
+};
 
   const handleSubmit = async (newClientData) => {
     if (modalMode === 'add') {
@@ -48,7 +52,7 @@ function App() {
     } else {
       console.log('Updating client with ID:', clientData.id); // Log the ID being updated
             try {
-                const response = await axios.put(`http://localhost:3000/api/clients/${clientData.id}`, newClientData);
+                const response = await axios.put(`http://localhost:3000/api/client/${clientData.id}`, newClientData);
                 console.log('Client updated:', response.data);
                 setTableData((prevData) =>
                   prevData.map((client) => (client.id === clientData.id ? response.data : client))
@@ -65,9 +69,9 @@ function App() {
     {/* ++ py-5 px-5 */}
       <div className="py-5 px-5 " data-theme="pastel">
           <NavBar onOpen={() => handleOpen('add')} onSearch={setSearchTerm}/>
-          <TableList onOpen={() => handleOpen('edit')} searchTerm={searchTerm} tableData={tableData} setTableData={setTableData}/>
+          <TableList onOpen={(client) => handleOpen('edit', client)} searchTerm={searchTerm} tableData={tableData} setTableData={setTableData}/>
           <ModalForm isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
+           onClose={handleClose}
           mode={modalMode}
           onSubmit={handleSubmit}
           clientData={clientData}

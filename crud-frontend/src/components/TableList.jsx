@@ -56,7 +56,7 @@ return (
                             </button>
                         </td>
                         <td>
-                            <button className="btn rounded-full btn-secondary " onClick={onOpen}>Update</button>
+                            <button className="btn rounded-full btn-secondary " onClick={() => onOpen(item)}>Update</button>
                         </td>
                         <td>
                             <button className="btn rounded-full btn-accent" onClick={() => {handleDelete(item.id)}}>Delete</button>
